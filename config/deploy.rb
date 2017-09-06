@@ -3,13 +3,13 @@ lock "3.8.1"
 
 
 set :application, "meoflix_en"
-set :repo_url, "git@gitlab.com:wigocreative-labs/meoflix.git"
+set :repo_url, "https://github.com/marks88martinez/meoflix_en.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/meoflix"
+set :deploy_to, "/var/www/meoflix_en"
 set :branch, "master"
 
 # Default value for :format is :airbrussh.
