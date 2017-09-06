@@ -1,0 +1,173 @@
+<style>
+.stylo_producto{
+  text-align: center;
+
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+.contenido{
+  padding-top: 5rem;
+}
+.bg_prod{
+  background: #ff845d;
+  margin: 2px;
+  cursor: pointer;
+
+}
+.bg_prod a{
+color: #fff;
+
+}
+.caracteristicas{
+color: white;
+padding-top: 5px;
+text-align: left;
+border: solid 4px;
+border-color: #128eb3 ;
+background: #0e7290;
+  }
+  .titulo-carac{
+    font-family: sans-serif;
+    font-size: 1.6rem;
+  }
+  .descripcion-carac{
+    font-family: sans-serif;
+    font-size: 0.8rem;
+  }
+.top_carac{
+  padding-top: 70px;
+  overflow: scroll;
+}
+</style>
+
+
+
+<nav class="navbar fixed-top charming-navbar navbar-toggleable-md navbar-light wow fadeInDown  menu_prod">
+
+  <ul class="nav justify-content-center">
+<% @produc.datosproducto.each do |p|%>
+  <li class="nav-item bg_prod">
+    <a class="nav-link" id='section_<%= p.id %>' href='#<%= p.id%>'> <%= truncate(p.nombre, length:10)  %> </a>
+
+  </li>
+  <% end %>
+
+</ul>
+</nav>
+
+
+  <% if !@produc.datosproducto.blank? %>
+<div class="container espacio">
+  <h1 ><%= @produc.nombre %></h1>
+</div>
+
+
+
+      <!-- //////////////////// -->
+        <% @produc.datosproducto.each do |p|%>
+          <% if (p.datosproductos.empty?)  %>
+            <!-- ///////// -->
+            <section  class='<%= p.id%>' id='<%= p.id%>'>
+              <div class="jumbotron stylo_producto"  style='background: <%= p.color_bg %>' >
+
+                <div class="container contenido">
+                  <h1 class="wow flipInX"><%= p.nombre %></h1>
+                  <p class="lead wow flipInY"><%= p.descripcion %></p>
+                  <% if !p.picture.blank? %>
+                    <%= image_tag p.picture.url(:large), class: "rounded empresa wow slideInDown  img-fluid  show_img" , alt: "Responsive image", style: 'width=80%'  %>
+                  <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
+                  <% end %>
+
+                </div>
+              </div>
+            </section>
+            <!-- ///////// -->
+          <% else %>
+              <!-- ///////// -->
+              <section  class='<%= p.id%>' id='<%= p.id%>'>
+                <div class=" stylo_producto top_carac"  style="background: #128eb3" >
+
+                  <div class="container">
+                    <div class="row">
+                      <% @produc.datosproducto.each do |p|%>
+
+                        <% if (!p.datosproductos.empty?)  %>
+
+                          <% p.datosproductos.each do |c| %>
+                      <div class="col-md-4 caracteristicas">
+                        <h2 class="titulo-carac">  <%= c.nombre %></h2>
+                        <p class="descripcion-carac">  <%= c.descripcion %></p>
+                      </div>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+
+                    </div>
+
+                  </div>
+                </div>
+              </section>
+              <!-- ///////// -->
+
+          <% end %>
+
+
+
+          <% end %>
+        <!-- /////////////////// -->
+
+
+<!-- ///////////////// -->
+
+
+  <% else %>
+  <div class="container espacio">
+    <br>
+    <h1 ><%= @produc.nombre %></h1>
+
+  </div>
+
+  <div class="jumbotron" style="text-align: center">
+
+    <div class="container">
+      <h1>Sin Datos</h1>
+      <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
+      <hr>
+
+    </div>
+
+
+  <% end %>
+
+
+  <!-- ///////////////////// -->
+
+
+
+
+
+
+
+
+
+  <!-- ///////////////////// -->
+
+
+
+
+
+
+  <% content_for :productos do %>
+    <script type="text/javascript">
+      <% @produc.datosproducto.each do |p|%>
+      $("#section_<%= p.id %>").on('click',function(event) {
+
+        $('html, body').animate({
+             scrollTop: $(".<%= p.id %>").offset().top-92 /*class you want to scroll to!!*/
+         }, 1000);
+      });
+      <% end %>
+    </script>
+  <% end %>
+  <br>

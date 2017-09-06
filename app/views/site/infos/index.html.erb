@@ -1,0 +1,22 @@
+
+  <div class="bg-section">
+
+    <div class="container ">
+      <br>
+    <h1 >Empresa</h1>
+      <% @info.each do |i|  %>
+      <h3><%= i.titulo %></h3>
+      <% if !i.picture.blank? %>
+      <%= image_tag i.picture.url(:large), class: "rounded empresa img-fluid" , alt: "Responsive image" %>
+      <% end %>
+      <p><%= i.descripcion %></p>
+
+      <% end %>
+
+      <br>
+        <hr class="featurette-divider">
+    </div>
+
+
+  </div>
+<br>
